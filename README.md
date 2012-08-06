@@ -1,0 +1,4 @@
+LinkNote
+========
+
+an easy Note
