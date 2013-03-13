@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkNote", "LinkNote\LinkNo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkNote via WinForm", "LinkNote via WinForm\LinkNote via WinForm.csproj", "{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkNote2", "LinkNote2\LinkNote2.csproj", "{88638B53-F3EE-455E-AA7A-E85D838B70C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,17 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|Win32.ActiveCfg = Debug|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|x86.ActiveCfg = Debug|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|x86.Build.0 = Debug|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Any CPU.ActiveCfg = Release|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Any CPU.Build.0 = Release|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Win32.ActiveCfg = Release|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|x86.ActiveCfg = Release|x86
+		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|x86.Build.0 = Release|x86
 		{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -29,17 +42,18 @@ Global
 		{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}.Release|Win32.ActiveCfg = Release|Any CPU
 		{F5D203E5-85FF-4C5B-A851-0F3D00C4F339}.Release|x86.ActiveCfg = Release|Any CPU
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|Win32.ActiveCfg = Debug|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|x86.ActiveCfg = Debug|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Debug|x86.Build.0 = Debug|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Any CPU.ActiveCfg = Release|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Any CPU.Build.0 = Release|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|Win32.ActiveCfg = Release|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|x86.ActiveCfg = Release|x86
-		{F843C689-457A-4DFE-B915-D1600AC24F2F}.Release|x86.Build.0 = Release|x86
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Release|Win32.ActiveCfg = Release|Any CPU
+		{88638B53-F3EE-455E-AA7A-E85D838B70C5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
