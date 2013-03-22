@@ -3,29 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LinkNote2.Data
+namespace LinkNote2.Data.Model
 {
-    [DbModel]
-    public class Content
+    [DbModel(Table = "Index")]
+    public class DataPath
     {
         [DbModelField]
+        [DbModelKeyField]
         public long Id { get; set; }
-        
+
         [DbModelField]
         public long Parent { get; set; }
 
         [DbModelField]
         public string Name { get; set; }
 
-        public string Path { get; set; }
-
         [DbModelField]
-        public string Hash { get; set; }
-
-        [DbModelField]
-        public string Data { get; set; }
-
-        [DbModelField]
-        public bool Encrypted { get; set; }
+        public DateTime LastModify { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Awesomium.Core.Data;
 
 namespace LinkNote2.Data
 {
-    public class GzipDataSource : DataSource
+    public class GzipDataSource : DataSourceBase
     {
         public string FilePath { get; private set; }
 
@@ -54,7 +54,6 @@ namespace LinkNote2.Data
 
         private bool IsGziped(string path)
         {
-            bool isGziped = false;
             switch ((Path.GetExtension(path) ?? "").Replace(".", "").ToLower())
             {
                 case "html":
@@ -64,10 +63,9 @@ namespace LinkNote2.Data
                 case "text":
                 case "txt":
                 case "css":
-                    isGziped = true;
-                    break;
+                    return true;
             }
-            return isGziped;
+            return false;
         }
 
         private FileStream OpenFile()
@@ -75,61 +73,48 @@ namespace LinkNote2.Data
             return File.Open(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         }
 
-        protected override void OnRequest(DataSourceRequest request)
+        protected override byte[] GetFileData(string path)
         {
-            var path = request.Path.ToLower();
-            if (!(_dataPak.ContainsKey(path)))
-            {
-                SendResponse(request, new DataSourceResponse { Buffer = IntPtr.Zero, MimeType = request.MimeType, Size = 0 });
-                return;
-            }
+            byte[] data;
             var fileInfo = _dataPak[path];
-            var ms = new MemoryStream();
-            using (var source = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                byte[] buffer = new byte[4096];
-                using (var fs = OpenFile())
+                using (var source = new MemoryStream())
                 {
-                    fs.Seek(fileInfo.Position, SeekOrigin.Begin);
-                    int count, max = fileInfo.Length;
-                    while ((count = fs.Read(buffer, 0, Math.Min(4096, max))) > 0)
+                    byte[] buffer = new byte[4096];
+                    using (var fs = OpenFile())
                     {
-                        source.Write(buffer, 0, count);
-                        max -= count;
-                        if (max == 0)
+                        fs.Seek(fileInfo.Position, SeekOrigin.Begin);
+                        int count, max = fileInfo.Length;
+                        while ((count = fs.Read(buffer, 0, Math.Min(4096, max))) > 0)
                         {
-                            break;
+                            source.Write(buffer, 0, count);
+                            max -= count;
+                            if (max == 0)
+                            {
+                                break;
+                            }
                         }
                     }
-                }
-                source.Seek(0, SeekOrigin.Begin);
-                using (var gzip = fileInfo.IsGziped ? (Stream)new GZipStream(source, CompressionMode.Decompress) : new BufferedStream(source))
-                {
-                    int count;
-                    while ((count = gzip.Read(buffer, 0, 4096)) > 0)
+                    source.Seek(0, SeekOrigin.Begin);
+                    using (var gzip = fileInfo.IsGziped ? (Stream)new GZipStream(source, CompressionMode.Decompress) : new BufferedStream(source))
                     {
-                        ms.Write(buffer, 0, count);
+                        int count;
+                        while ((count = gzip.Read(buffer, 0, 4096)) > 0)
+                        {
+                            ms.Write(buffer, 0, count);
+                        }
+                        ms.Flush();
                     }
-                    ms.Flush();
                 }
+                data = ms.ToArray();
             }
+            return data;
+        }
 
-            var data = ms.ToArray();
-            ms.Dispose();
-            unsafe
-            {
-                fixed (byte* pdata = data)
-                {
-                    IntPtr ptr = new IntPtr(pdata);
-                    DataSourceResponse response = new DataSourceResponse
-                    {
-                        Buffer = ptr,
-                        Size = (uint)data.Length,
-                        MimeType = request.MimeType
-                    };
-                    SendResponse(request, response);
-                }
-            }
+        protected override bool IsExistPath(string path)
+        {
+            return _dataPak.ContainsKey(path);
         }
     }
 }

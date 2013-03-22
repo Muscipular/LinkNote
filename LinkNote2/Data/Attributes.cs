@@ -14,4 +14,8 @@ namespace LinkNote2.Data
     {
         public string FieldName { get; set; }
     }
+    
+    class DbModelKeyFieldAttribute : Attribute
+    {
+    }
 }
