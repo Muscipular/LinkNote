@@ -5,20 +5,14 @@ using System.Text;
 
 namespace LinkNote2.Data.Model
 {
-    [DbModel(Table = "Index")]
     public class DataPath
     {
-        [DbModelField]
-        [DbModelKeyField]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
-        [DbModelField]
-        public long Parent { get; set; }
+        public string Parent { get; set; }
 
-        [DbModelField]
         public string Name { get; set; }
 
-        [DbModelField]
-        public DateTime LastModify { get; set; }
+        public string Path { get; set; }
     }
 }

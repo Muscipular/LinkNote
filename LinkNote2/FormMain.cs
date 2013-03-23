@@ -23,7 +23,7 @@ namespace LinkNote2
         {
             base.OnShown(e);
             var dropNetClient = DropBoxHelper.CurrentClient();
-            dropNetClient.GetToken();
+            //dropNetClient.GetToken();
 #if DEBUG
             var dataSource = new DirectoryDataSource(Environment.CurrentDirectory + "\\..\\..\\Asset\\www\\");
 #else
@@ -38,15 +38,8 @@ namespace LinkNote2
             });
             _Web.WebSession.AddDataSource("www.app.local", dataSource);
             _Web.WebSession.AddDataSource("service.app.local", new GzipDataSource(Environment.CurrentDirectory + "\\core.pak"));
-            _Web.Source = new Uri(dropNetClient.BuildAuthorizeUrl("asset://www.app.local/index.html"));
-            _Web.TargetURLChanged += _Web_TargetURLChanged;
-            //            _MainForm.DocumentStream
+            //_Web.Source = new Uri(dropNetClient.BuildAuthorizeUrl("asset://www.app.local/index.html"));
             //var x = dropNetClient.GetAccessToken();
-        }
-
-        void _Web_TargetURLChanged(object sender, Awesomium.Core.UrlEventArgs e)
-        {
-
         }
     }
 }
