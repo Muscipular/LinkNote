@@ -14,5 +14,7 @@ namespace LinkNote2.Data.Model
         public string Name { get; set; }
 
         public string Path { get; set; }
+
+        public Content[] Contents { get; set; }
     }
 }

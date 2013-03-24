@@ -33,7 +33,7 @@ namespace LinkNote2.Service
                 var hash = CommonService.Instance.HashMD5(DirPath);
                 _Root = new DataPath() { Id = hash, Parent = hash, Path = DirPath };
             }
-            
+
             return _Root;
         }
 
@@ -55,7 +55,19 @@ namespace LinkNote2.Service
 
         public Content[] GetContents(DataPath dataPath)
         {
-            return null;
+            var path = dataPath + "\\index.data.json";
+            if (File.Exists(path))
+            {
+                var json = File.ReadAllText(path);
+                try
+                {
+                    return Newtonsoft.Json.JsonConvert.DeserializeObject<DataPath>(json).Contents;
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return new Content[0];
         }
     }
 }
