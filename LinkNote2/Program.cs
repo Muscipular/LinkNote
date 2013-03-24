@@ -18,7 +18,7 @@ namespace LinkNote2
         {
             WebCore.Initialize(new WebConfig()
             {
-                HomeURL = new Uri("asset://www.app.local/index.html"),
+//                HomeURL = new Uri("asset://www.app.local/index.html"),
                 LogLevel = LogLevel.Verbose,
             });
             Application.EnableVisualStyles();

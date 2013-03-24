@@ -24,8 +24,16 @@ namespace LinkNote2.Data
         protected override string ParsePath(string path)
         {
             path = DirectoryPath + "\\" + path.ToLower().Replace('/', '\\').Trim();
-            path = path.Remove(path.IndexOf('?'));
-            path = path.Remove(path.IndexOf('#'));
+            var p = path.IndexOf('?');
+            if (p >= 0)
+            {
+                path = path.Remove(p);
+            }
+            p = path.IndexOf('#');
+            if (p >= 0)
+            {
+                path = path.Remove(p);
+            }
             return path;
         }
 

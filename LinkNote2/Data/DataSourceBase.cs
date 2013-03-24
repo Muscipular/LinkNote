@@ -12,7 +12,7 @@ namespace LinkNote2.Data
         protected sealed override void OnRequest(DataSourceRequest request)
         {
             var path = ParsePath(request.Path);
-            var data = GetData(path);
+            var data = GetData(path, true);
             if (data == null || data.Length == 0)
             {
                 SendNullResponse(request);
@@ -43,14 +43,35 @@ namespace LinkNote2.Data
         protected virtual string ParsePath(string s)
         {
             var path = s.ToLower().Trim();
-            path = path.Remove(path.IndexOf('?'));
-            path = path.Remove(path.IndexOf('#'));
+            var p = path.IndexOf('?');
+            if (p >= 0)
+            {
+                path = path.Remove(p);
+            }
+            p = path.IndexOf('#');
+            if (p >= 0)
+            {
+                path = path.Remove(p);
+            }
             return path;
         }
 
         public byte[] GetData(string path)
         {
             path = ParsePath(path);
+            if (!IsExistPath(path))
+            {
+                return new byte[0];
+            }
+            return GetFileData(path);
+        }
+
+        protected byte[] GetData(string path, bool isParse)
+        {
+            if (!isParse)
+            {
+                path = ParsePath(path);
+            }
             if (!IsExistPath(path))
             {
                 return new byte[0];
