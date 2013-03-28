@@ -11,6 +11,7 @@ using DropNet;
 using DropNet.Models;
 using LinkNote2.Data;
 using LinkNote2.Service;
+using Newtonsoft.Json;
 
 namespace LinkNote2
 {
@@ -19,7 +20,8 @@ namespace LinkNote2
         public FormMain()
         {
             InitializeComponent();
-
+            _Web.ProcessCreated += _Web_ProcessCreated;
+            _Web.ShowContextMenu += (sender, args) => args.Handled = _Web.FocusedElementType != FocusedElementType.EditableContent;
         }
 
         protected override void OnShown(EventArgs e)
@@ -44,7 +46,6 @@ namespace LinkNote2
             });
             _Web.WebSession.AddDataSource("www.app.local", dataSource);
             _Web.WebSession.AddDataSource("service.app.local", new GzipDataSource(Environment.CurrentDirectory + "\\core.pak"));
-            _Web.DocumentReady += _Web_ProcessCreated;
             _Web.Source = new Uri("asset://www.app.local/index.html");
             //            _Web.Source = new Uri(dropNetClient.BuildAuthorizeUrl("asset://www.app.local/index.html"));
             //var x = dropNetClient.GetAccessToken();
@@ -61,6 +62,24 @@ namespace LinkNote2
             appService.index = indexService;
             appService.common = commonService;
 
+
+            InitIndexService(indexService);
+            InitWinService(winService);
+        }
+
+        private void InitIndexService(dynamic indexService)
+        {
+            indexService.GetRoot = (JavascriptMethodEventHandler)((s, args) =>
+            {
+                var root = IndexService.Instance.GetRoot();
+                var o = JsonConvert.SerializeObject(root);
+                args.Result = _Web.ExecuteJavascriptWithResult("(" + o + ")");
+                args.ToString();
+            });
+        }
+
+        private void InitWinService(dynamic winService)
+        {
             winService.ShowMessage = (JavascriptMethodEventHandler)((s, ex) =>
             {
                 var msg = ex.Arguments.Length > 1 ? ex.Arguments[0].ToString() : string.Empty;
