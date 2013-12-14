@@ -1,0 +1,172 @@
+@top-bar-height: 38px;
+@left-panel-width: 200px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#fefefe, #fbfbfb);
+}
+
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: @top-bar-height;
+  background: linear-gradient(darken(#fff, 2%), darken(#fff, 4%));
+  box-shadow: #666 0px 0px 1px;
+  padding: 8px 5px;
+  z-index: 1;
+
+  > .btn {
+    margin-right: 3px;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border: 1px solid #f0f0f0;
+  box-shadow: #888 0px 0px 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 58px;
+  text-align: center;
+
+  &:hover {
+    border: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  &.disable {
+    cursor: default;
+  }
+}
+
+.left-panel {
+  -webkit-user-select: none;
+  width: @left-panel-width;
+  position: fixed;
+  top: @top-bar-height;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  border-right: 1px solid rgba(0, 0, 0, 0.20);
+  padding: 0.5em 0;
+
+  .node-list {
+    padding-left: 2em;
+    margin: 0;
+    position: relative;
+
+    .node-list {
+      padding-left: 0.7em;
+    }
+
+    > .node-item {
+
+      > .title {
+        display: block;
+        height: 100%;
+
+        &.selected {
+          background-color: #fee100;
+        }
+      }
+
+      list-style: none;
+      position: relative;
+      min-height: 2em;
+      padding-top: 0.5em;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: -1.0em;
+        top: 0.71em;
+        border: 0.32em solid #aaa;
+        border-radius: 1em;
+        //        border-right: none;
+        //        border-left: 0.8em solid #aaa;
+      }
+
+      &.expandable {
+        &:before {
+          top: 0.55em;
+          border: 0.45em solid transparent;
+          border-radius: 0;
+          border-right: none;
+          border-left: 0.8em solid #aaa;
+        }
+
+        > .node-list {
+          height: 0;
+          //          overflow: hidden;
+        }
+
+        &.expanded {
+          &:before {
+            border-right: 0.45em solid transparent;
+            border-left: 0.45em solid transparent;
+            //            border-radius: 0;
+            left: -1.1em;
+            top: 0.65em;
+            border-bottom: none;
+            border-top: 0.8em solid #aaa;
+          }
+
+          > .node-list {
+            height: auto;
+
+            //            transition: height 0.5s ease-in-out 0s;
+          }
+        }
+      }
+    }
+  }
+}
+
+.main-panel {
+  position: fixed;
+  top: @top-bar-height;
+  left: @left-panel-width;
+  right: 0;
+  bottom: 0;
+
+  .editor {
+    outline: none;
+    &:focus {
+      background-color: #eee;
+    }
+  }
+
+  .preview {
+    :first-child {
+      margin-top: 0px;
+    }
+  }
+
+  .editor, .preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    padding: 0.5em;
+    z-index: 1;
+
+    &.active {
+      z-index: 1;
+    }
+    &.inactive {
+      z-index: 0;
+    }
+  }
+}

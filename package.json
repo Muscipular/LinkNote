@@ -1,0 +1,13 @@
+{
+    "name": "NWNote",
+    "version": "0.0.1",
+    "main": "html/index.html",
+    "node-main": "lib/service.js",
+    "dependencies": {
+        "less": "*",
+        "marked": "*",
+        "highlight.js": "*",
+        "bluebird": "*",
+        "dropbox": "*"
+    }
+}

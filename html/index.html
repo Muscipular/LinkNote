@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NWNote</title>
+    <!--<script type="text/javascript" src="./js/zepto.js"></script>-->
+    <!--<script type="text/javascript" src="./js/knockout-3.0.0.debug.js"></script>-->
+    <link rel="stylesheet" href="./css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/highlight.css" type="text/css"/>
+</head>
+<body>
+<div class="top-bar">
+    <a class="btn" data-bind="click: reload">Reload</a>
+    <a class="btn" data-bind="click: save">Save</a>
+    <a class="btn" data-bind="click: edit"><span data-bind="text:!preview()? 'Preview':'Edit'"></span></a>
+</div>
+<div class="left-panel">
+    <!--<div data-bind="text: noteList().length"></div>-->
+    <div data-bind="template: { name: 'note-list', data: root }"></div>
+</div>
+<div class="main-panel">
+    <div class="editor" data-bind="css:{inactive:preview()}" contenteditable="true"></div>
+    <div class="preview" data-bind="css:{inactive:!preview()}"></div>
+</div>
+<script type="text/javascript" src="./js/sea.js"></script>
+<script type="text/javascript" src="./js/preprocess.js"></script>
+</body>
+</html>

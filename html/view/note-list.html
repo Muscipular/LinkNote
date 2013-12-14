@@ -1,0 +1,9 @@
+<ul class="node-list" data-bind="foreach: noteList">
+    <li class="node-item" data-bind="css:{ expanded: expanded, expandable: expandable,selected: selected }"><span
+            class="title" data-bind="text: noteTitle,css:{selected:$root.selectedNote()[0] === $data }"></span>
+        <!-- ko if: expanded -->
+        <!-- ko template: { name: 'note-list', data: $data } -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </li>
+</ul>
