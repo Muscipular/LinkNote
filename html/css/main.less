@@ -69,13 +69,24 @@ body {
     }
 
     > .node-item {
+      > .note-title {
+        position: relative;
 
-      > .title {
-        display: block;
-        height: 100%;
+        > .expander {
+          position: absolute;
+          left: -1.0em;
+          top: 0.31em;
+          border: 0.32em solid #aaa;
+          border-radius: 1em;
+        }
+      }
 
-        &.selected {
-          background-color: #fee100;
+      &.selected {
+        > .note-title {
+          > .title {
+            color: fade(#3399ff,90%);
+//            font-weight: bold;
+          }
         }
       }
 
@@ -84,47 +95,29 @@ body {
       min-height: 2em;
       padding-top: 0.5em;
 
-      &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: -1.0em;
-        top: 0.71em;
-        border: 0.32em solid #aaa;
-        border-radius: 1em;
-        //        border-right: none;
-        //        border-left: 0.8em solid #aaa;
-      }
-
       &.expandable {
-        &:before {
-          top: 0.55em;
-          border: 0.45em solid transparent;
-          border-radius: 0;
-          border-right: none;
-          border-left: 0.8em solid #aaa;
-        }
-
-        > .node-list {
-          height: 0;
-          //          overflow: hidden;
+        > .note-title {
+          > .expander {
+            top: 0.15em;
+            border-top: 0.45em solid transparent;
+            border-bottom: 0.45em solid transparent;
+            border-radius: 0;
+            border-right: none;
+            border-left: 0.8em solid #aaa;
+          }
         }
 
         &.expanded {
-          &:before {
-            border-right: 0.45em solid transparent;
-            border-left: 0.45em solid transparent;
-            //            border-radius: 0;
-            left: -1.1em;
-            top: 0.65em;
-            border-bottom: none;
-            border-top: 0.8em solid #aaa;
-          }
-
-          > .node-list {
-            height: auto;
-
-            //            transition: height 0.5s ease-in-out 0s;
+          > .note-title {
+            > .expander {
+              border-right: 0.45em solid transparent;
+              border-left: 0.45em solid transparent;
+              //            border-radius: 0;
+              left: -1.1em;
+              top: 0.25em;
+              border-bottom: none;
+              border-top: 0.8em solid #aaa;
+            }
           }
         }
       }

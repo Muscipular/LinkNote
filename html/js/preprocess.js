@@ -36,6 +36,13 @@ define('sammy', function (require) {
 
 define('ko', function (require) {
     require('./knockout-3.0.0.debug.js');
+    ko.bindingHandlers.allowBindings = {
+        init: function(elem, valueAccessor) {
+            // Let bindings proceed as normal *only if* my value is false
+            var shouldAllowBindings = ko.unwrap(valueAccessor());
+            return { controlsDescendantBindings: !shouldAllowBindings };
+        }
+    };
     return window.ko;
 });
 

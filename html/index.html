@@ -23,5 +23,20 @@
 </div>
 <script type="text/javascript" src="./js/sea.js"></script>
 <script type="text/javascript" src="./js/preprocess.js"></script>
+<script type="text/html" id="note-list">
+    <ul class="node-list" data-bind="foreach: noteList">
+        <li class="node-item" data-bind="css:{ expanded: expanded, expandable: expandable, selected:$root.selectedNote()[0] === $data }">
+            <div class="note-title">
+                <div class="expander"></div>
+                <div class="title"
+                      data-bind="text: noteTitle"></div>
+            </div>
+            <!-- ko if: expanded -->
+            <!-- ko template: { name: 'note-list', data: $data } -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </li>
+    </ul>
+</script>
 </body>
 </html>

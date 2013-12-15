@@ -14,7 +14,7 @@ define(function (require) {
             var preview = this.preview();
             var data = $('.editor')[0].innerText;
             this.preview(!preview);
-            if (!preview && data) {
+            if (!preview) {
                 $('.preview').html(service.md(data));
             }
         },
@@ -28,14 +28,15 @@ define(function (require) {
     };
     vm.init();
 
-    require('template')
-        .loadTemplate('note-list')
-        .then(function () {
-            return require('service').list();
-        })
+//    require('template')
+//        .loadTemplate('note-list')
+//        .then(function () {
+//            return require('service').list();
+//        })
 //        .map(function (note) {
 //            return new Note(note);
 //        })
+    require('service').list()
         .then(function (notes) {
             return new Note({title: 'root', list: notes, root: true});
         })
@@ -46,13 +47,15 @@ define(function (require) {
             ko.applyBindings(vm);
         });
 
+    var expand = function (e) {
+        var data = ko.dataFor(e.target);
+        if (data) {
+            data.expanded(!data.expanded());
+        }
+    };
     $('.left-panel > div')
-        .on('dblclick', '.title', function (e) {
-            var data = ko.dataFor(e.target);
-            if (data) {
-                data.expanded(!data.expanded());
-            }
-        })
+        .on('dblclick', '.title', expand)
+        .on('click', '.expander', expand)
         .on('click', ".title", function (e) {
             var note = ko.dataFor(e.target);
             if (note === vm.selectedNote()[0]) {
